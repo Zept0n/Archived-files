@@ -1,0 +1,104 @@
+#include <iostream>
+using namespace std;
+int encrypt()
+{
+    char message[100], ch;
+    int i, key;
+    
+    cout << "Текст за шифровка:";
+    cin>>message;
+    cout << "Ключ: ";
+    cin >> key;
+    
+    for(i = 0; message[i] != '\0'; ++i){
+        ch = message[i];
+        
+        if(ch >= 'a' && ch <= 'z'){
+            ch = ch + key;
+            
+            if(ch > 'z'){
+                ch = ch - 'z' + 'a' - 1;
+            }
+            
+            message[i] = ch;
+        }
+        else if(ch >= 'A' && ch <= 'Z'){
+            ch = ch + key;
+            
+            if(ch > 'Z'){
+                ch = ch - 'Z' + 'A' - 1;
+            }
+            
+            message[i] = ch;
+        }
+    }
+    
+    cout << "Шифрован текст: " << message;
+    
+}
+
+int decrypt()
+{
+    char message[100], ch;
+    int i, key;
+    
+    cout << "Текст за дешифровка: ";
+    cin>>message;
+    cout << "Ключ: ";
+    cin >> key;
+    
+    for(i = 0; message[i] != '\0'; ++i){
+        ch = message[i];
+        
+        if(ch >= 'a' && ch <= 'z'){
+            ch = ch - key;
+            
+            if(ch < 'a'){
+                ch = ch + 'z' - 'a' + 1;
+            }
+            
+            message[i] = ch;
+        }
+        else if(ch >= 'A' && ch <= 'Z'){
+            ch = ch - key;
+            
+            if(ch > 'a'){
+                ch = ch + 'Z' - 'A' + 1;
+            }
+            
+            message[i] = ch;
+        }
+    }
+    
+    cout << "Дешифрован текст: " << message;
+
+}
+
+int main()
+{
+   int x;
+
+   do
+   {
+       cout<<"\n";
+       cout<< "0.Излизане \n";
+       cout<< "1.Шифровка \n";
+       cout<< "2.Дешифровка \n";
+       cin >> x;
+   switch(x)
+   {
+    case 1:
+    encrypt();
+    break;
+    case 2:
+    decrypt();
+    break;
+    case 0:
+    cout<<"Излизане..." ;
+    break;
+    default:
+    cout << "\nГрешка !!!\n";
+   }
+   } while(x!= 0);
+   return 0;
+}
